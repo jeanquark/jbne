@@ -3,7 +3,6 @@
 // php artisan migrate
 // php artisan db:seed
 // composer dump-autoload
-// php artisan db:seed
 
 // Routes cachées:
 // Avocats stagiaires/admin => /login
