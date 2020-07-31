@@ -49,6 +49,20 @@ To install external libraries:
 php ../../composer.phar update
 ```
 
+
+## Package errors
+
+unisharp/laravel-filemanager
+
+```bash
+	In file LfmHelpers.php, replace this line
+		return lcfirst(str_singular(request('type'))) === 'image';
+	
+	by this one:
+    	return lcfirst(str_singular(request('type') ?: '')) === 'image';
+```
+
+
 ## Author
 [Jean-Marc Kleger](http://www.jmkleger.com)
 
