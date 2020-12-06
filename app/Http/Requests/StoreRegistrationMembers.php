@@ -29,7 +29,8 @@ class StoreRegistrationMembers extends FormRequest
             'localite' => ['required', 'max:64', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ0-9 ,.\'-]+$/i'],
             'statut' => ['required'],
             'password'  => ['required', 'min:6', 'confirmed'],
-            'password_confirmation' => ['required']
+            'password_confirmation' => ['required'],
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 }

@@ -11,8 +11,9 @@
         }
     ],
     "require": {
-        "php": ">=7.0.0",
+        "php": "^7.4.1",
         "bestmomo/laravel-email-confirmation": "^1.1",
+        "buzz/laravel-google-captcha": "^2.3",
         "hieu-le/active": "^3.1",
         "jenssegers/date": "^3.2",
         "laravel/framework": "5.5.*",

@@ -11,3 +11,10 @@ npm-debug.log
 .env
 .env.live
 /public/files
+/public/documents
+/public/images/activities
+/public/images/agenda
+/public/images/portfolio
+/public/images/about
+/public/images/team
+/public/images/trainees

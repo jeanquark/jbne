@@ -215,6 +215,11 @@ return [
          * Laravel Monolog (save errors in db)
          */
         Logger\Laravel\Provider\MonologMysqlHandlerServiceProvider::class,
+
+        /*
+         * Laravel Google Captcha
+         */
+        Buzz\LaravelGoogleCaptcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -288,6 +293,9 @@ return [
 
         /* Laravel String */
         'Str' => Illuminate\Support\Str::class,
+
+        /* Laravel Captcha */
+        'Captcha' => Buzz\LaravelGoogleCaptcha\CaptchaFacade::class,
     ],
 
     'PERMANENCES_AVAILABILITIES_CLOSING_DAY' => env('PERMANENCES_AVAILABILITIES_CLOSING_DAY', 10),

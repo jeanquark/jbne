@@ -101,34 +101,8 @@ class LawyerRegisterController extends Controller
             \Toastr::error('Oups, une erreur est survenue lors de la procédure d\'inscription. Veuillez réessayer et nous <a href="/home#contact" target="_blank"><b>contacter</b></a> en cas de nouvel échec.', 'Erreur', ['timeout' => 10000]);
         }
 
-        // Send Email
-        // Instantiate the client
-        // $mgClient = new Mailgun(env('MAIL_SECRET'));
-        // $domain = "jbne.ch";
-
-        // $recipients = json_encode($lawyer);
-        // dd($recipients);
-        // // $path = resource_path('views/emails/welcome.blade.php');
-        // $path = resource_path('views/emails/mailgun/lawyer_registration_verification.html');
-        // $message = file_get_contents($path);
-        // # Make the call to the client.
-        // $result = $mgClient->sendMessage($domain, array(
-        //     'from'    => 'Test message <jm.kleger@gmail.com>',
-        //     'to'      => 'jm.kleger@gmail.com',
-        //     // 'to'      => $emails,
-        //     // 'subject' => '%recipient.firstname%',
-        //     'subject' => 'Test verification of the registration',
-        //     // 'text'    => 'Testing some Mailgun awesomness!'
-        //     'html'    => $message,
-        //     'recipient-variables' => $recipients
-        // ));
-
-        // dd($result);
-
-        // Mail::to($user->email)->send(new VerifyMail($user));
-
         \Toastr::success('Vous êtes désormais enregistré comme avocat et pourrez transmettre vos disponibilités une fois votre compte confirmé.', 'Succès', ['timeout' => 10000]);
-        // return back()->withInput($request->only('email'))->with('confirmation-success', trans('confirmation::confirmation.message'));
+
         return Redirect::route('lawyer.login')->with('confirmation-success', trans('confirmation::confirmation.message'));
     }
 

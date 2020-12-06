@@ -34,6 +34,7 @@ class StoreLawyer extends FormRequest
             // 'phone_office' => ['sometimes', 'nullable', 'min:7', 'max:24', 'regex:/^[()+-.0-9 ]+$/'],
             // 'fax_office' => ['required', 'min:7', 'max:24', 'regex:/^[()+-.0-9 ]+$/'],
             'other_languages_input' => ['string', 'max: 64', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 }

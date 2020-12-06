@@ -2,42 +2,42 @@
 
 Site réalisé avec [Laravel 5.4](https://laravel.com/docs/5.4/), à partir du template bootstrap [Agency](https://startbootstrap.com/template-overviews/agency/)
 
-![frontpage](public/images/website.jpg)
+![frontpage](public/images/homepage.jpg)
 
 
 To install Laravel dependencies (`vendor` folder):
 ```bash
-	composer install
+composer install
 ```
 
 To install Vue dependencies (`node_modules` folder):
 ```bash
-	npm install
+npm install
 ```
 
 Specify application encryption key:
 ```bash
-	php artisan key:generate
+php artisan key:generate
 ```
 
 To compile vue assets:
 ```bash
-	npm run watch
+npm run watch
 ```
 
 To migrate DB tables:
 ```bash
-    php artisan migrate
+php artisan migrate
 ```
 
 To seed DB tables:
 ```bash
-    php artisan db:seed
+php artisan db:seed
 ```
 
 To lunch dev environment:
 ```bash
-	php artisan serve
+php artisan serve
 ```
 
 then visit localhost:8000
@@ -55,11 +55,11 @@ php ../../composer.phar update
 unisharp/laravel-filemanager
 
 ```bash
-	In file LfmHelpers.php, replace this line
-		return lcfirst(str_singular(request('type'))) === 'image';
-	
-	by this one:
-    	return lcfirst(str_singular(request('type') ?: '')) === 'image';
+In file LfmHelpers.php, replace this line
+	return lcfirst(str_singular(request('type'))) === 'image';
+
+by this one:
+	return lcfirst(str_singular(request('type') ?: '')) === 'image';
 ```
 
 
