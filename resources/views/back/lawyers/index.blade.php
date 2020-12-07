@@ -202,6 +202,7 @@
                                     'lastname': rawData[i][4],
                                     'email': rawData[i][6]
                                 }
+                                // lawyersArray.push(rawData[i][6])
                             }
 
                             // console.log(lawyers);
@@ -212,7 +213,7 @@
                             swal({
                                 title: "Etes-vous sûr?",
                                 html: true,
-                                text: "Vous êtes sur le point d'envoyer un e-mail indiquant l'ouverture de la période de transmission des disponibilités pour la permanence à: <br /><b>" + lawyerInfo + "</b>",
+                                text: "Vous êtes sur le point d'envoyer un e-mail indiquant l'ouverture de la période de transmission des disponibilités pour la permanence à (l'envoi peut prendre quelques dizaines de secondes selon la longueur de la liste): <br /><b>" + lawyerInfo + "</b>",
                                 type: "warning",
                                 customClass: 'swal',
                                 showCancelButton: true,
@@ -225,18 +226,23 @@
                             function(isConfirm) {
                                 if (isConfirm) {
                                     $('.confirm').prop('disabled', true);
-                                    // console.log('lawyer: ', lawyers)
-                                    // return
+                                    console.log('lawyers: ', lawyers)
                                     $.ajax({
                                         type: 'POST',
                                         url: "{{ URL::route('back.lawyers.sendEmail') }}",
                                         data: {
                                             '_token': $('input[name=_token]').val(),
                                             'lawyers': lawyers
+                                            /*'lawyers': lawyersArray.map(function(lawyer) { 
+                                                return lawyer.email;
+                                            })*/
                                         },
                                         success: function(data) {                                
                                             swal("Succès", "Les emails vont être envoyés d'ici quelques minutes.", "success");
                                         },
+                                        error: function(){
+                                            swal("Erreur", "Une erreur est survenue et les emails n'ont pas pu être envoyés.", "error");
+                                        }
                                     });
                                 }
                                 else {

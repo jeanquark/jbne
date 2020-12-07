@@ -41,7 +41,8 @@
                                     <td class="content-cell" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 35px;">
                                         <h1 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #2F3133; font-size: 19px; font-weight: bold; margin-top: 0; text-align: left;">Enregistrement de vos disponibilités pour la permanence des avocats de la 1<sup>ère</sup> heure.</h1>
                                         <p style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #74787E; font-size: 16px; line-height: 1.5em; margin-top: 0; text-align: left;">
-                                            Maître {{ $lawyer->firstname }} {{ $lawyer->lastname }}
+                                            Maître {{ $lawyer['firstname'] }} {{ $lawyer['lastname'] }}
+                                            {{-- Maître, --}}
                                             <br /><br />
                                             Nous vous faisons parvenir ce message pour vous informer que vous pouvez dès à présent, et ce durant les 10 prochains jours, nous transmettre vos disponibilités dans le cadre de la permanence des avocats de la 1<sup>ère</sup> heure.<br /><br />
                                             Pour ce faire, veuillez vous loguer sur le site du <a href="www.jbne.ch/#login">JBNE</a> et remplir le tableau de vos disponibilités pour le prochain trimestre. Pour rappel, chaque semaine quatre avocats seront choisis aléatoirement parmi les avocats disponibles et figureront dans la liste des avocats de permanence transmises aux autorités cantonales. Bien évidemment, nous vous informerons en temps voulu du contenu de cette liste afin que vous puissiez prendre toutes les dispositions utiles pour être atteignable durant votre ou vos semaines de permanence.

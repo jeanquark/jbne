@@ -22,7 +22,6 @@ class LawyerRegisterController extends Controller
     use BaseRegistersUsers, DetectsApplicationNamespace;
 
 	public function __construct() {
-        // dd('abc');
 		$this->middleware('guest:lawyer');
 	}
 

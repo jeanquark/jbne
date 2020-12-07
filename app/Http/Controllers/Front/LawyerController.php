@@ -197,7 +197,6 @@ class LawyerController extends Controller
 
     public function submitQuestion(Request $request)
     {
-        // dd('abc');
         $rules = array(
             'message' => ['required','max:2048', "regex:/^[a-zàâçéèêëîïôûùüÿñæœ0-9?$@#()'!,+\-=_:.&€£*%\s]+$/i"],
         );
@@ -209,46 +208,21 @@ class LawyerController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            // $data = Input::all();
-
-            // $lawyer = Auth::guard('lawyer')->user();
-            // $data['nom'] = $lawyer->lastname;
-            // $data['prenom'] = $lawyer->firstname;
-            // $data['email'] = $lawyer->email;
-
-            // FormulaireContact::create($data);
-
-            // $receiverAddress = [env('MAIL_ALL_RECEIVER'), env('MAIL_CONTACT_RECEIVER')];
-            
-            // Mail::to($receiverAddress)->send(new Contact($data));
-
-            // \Toastr::success('Votre question nous a bien <br/>été envoyée.', 'Succès', ['timeOut' => 0]);
-            // return Redirect::back();
-
             $data = Input::all();
-            // dd($data);
+
             $lawyer = Auth::guard('lawyer')->user();
-            $receiverAddress = env('MAIL_CONTACT_RECEIVER');
-            $content = array($receiverAddress => array('prenom' => $lawyer->firstname, 'nom' => $lawyer->lastname, 'email' => $lawyer->email, 'message' => $data['message']));
-            $mgClient = new Mailgun(env('MAIL_SECRET'));
-            $domain = "jbne.ch";
-            $html = Storage::disk('local')->get('public/contact_mailgun.html');
+            $data['nom'] = $lawyer->lastname;
+            $data['prenom'] = $lawyer->firstname;
+            $data['email'] = $lawyer->email;
 
-            $result = $mgClient->sendMessage($domain, array(
-                'from'    => 'info@jbne.ch',
-                'to'      => $receiverAddress,
-                'subject' => 'Message envoyé depuis le formulaire de contact du site www.jbne.ch',
-                'html'    => $html,
-                'recipient-variables' => json_encode($content)
-            ));
+            FormulaireContact::create($data);
 
-            if ($result->http_response_code = 200) {
-                \Toastr::success('Votre question nous a bien <br/>été envoyée.', 'Succès', ['timeOut' => 0]);
-                return Redirect::back();
-            } else {
-                \Toastr::error('Une erreur est survenue et votre question n\'a pas pu nous être envoyée.', 'Erreur', ['timeOut' => 0]);
-                return Redirect::back();
-            }
+            $receiverAddress = [env('MAIL_ALL_RECEIVER'), env('MAIL_CONTACT_RECEIVER')];
+            
+            Mail::to($receiverAddress)->send(new Contact($data));
+
+            \Toastr::success('Votre question nous a bien <br/>été envoyée.', 'Succès', ['timeOut' => 0]);
+            return Redirect::back();
         }
     }
 

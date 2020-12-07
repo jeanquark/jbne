@@ -723,22 +723,25 @@
             deferredPrompt = e;
         });
 
-        document.getElementById("pwa_addButton").addEventListener('click', (e) => {
-            console.log('e: ', e)
-            document.getElementById("pwa").classList.add("hidden");
-            // Show the prompt
-            deferredPrompt.prompt();
-            // Wait for the user to respond to the prompt
-            deferredPrompt.userChoice
-                .then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the A2HS prompt');
-                    } else {
-                        console.log('User dismissed the A2HS prompt');
-                    }
-                    deferredPrompt = null;
-                });
-        });
+        const pwaAddButton = document.getElementById("pwa_addButton");
+        if (pwaAddButton) {
+            document.getElementById("pwa_addButton").addEventListener('click', (e) => {
+                console.log('e: ', e)
+                document.getElementById("pwa").classList.add("hidden");
+                // Show the prompt
+                deferredPrompt.prompt();
+                // Wait for the user to respond to the prompt
+                deferredPrompt.userChoice
+                    .then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the A2HS prompt');
+                        } else {
+                            console.log('User dismissed the A2HS prompt');
+                        }
+                        deferredPrompt = null;
+                    });
+            });
+        }
 
         function getExcerpt($str, $startPos=0, $maxLength=100) {
             if(strlen($str) > $maxLength) {

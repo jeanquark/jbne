@@ -181,26 +181,36 @@ class LawyersController extends Controller
     public function sendEmail()
     {
         $lawyers = Input::get('lawyers');
-        // dd(json_encode($lawyers));
-
-        $emails = [];
+        // dd($lawyers);
+         
         foreach($lawyers as $lawyer) {
-            array_push($emails, $lawyer['email']);
+            Mail::to($lawyer['email'])->send(new PermanencesRegistrationPeriod($lawyer));
         }
 
-        $mgClient = new Mailgun(env('MAIL_SECRET'));
-        $domain = "jbne.ch";
- 
-        $html = Storage::disk('local')->get('public/permanences_registration_period_mailgun.html');
 
-        $result = $mgClient->sendMessage($domain, array(
-            'from'    => 'info@jbne.ch',
-            'to'      => $emails,
-            'subject' => 'Ouverture de la période d\'enregistrement des disponibilités pour la permanence',
-            'text'    => 'Veuillez noter qu\'il vous est désormais possible de nous communiquer vos disponibilités pour la permanence du prochain trimestre. Pour ce faire, veuillez vous rendre sur le site du JBNE en vous connectant avec vos identifiants d\'avocat. N\'hésitez pas à nous contacter en cas de problème.',
-            'html'    => $html,
-            // 'recipient-variables' => '{"jm.kleger@gmail.com": {"first":"Bob", "id":1}, "alice@example.com": {"first":"Alice", "id": 2}}'
-            'recipient-variables' => json_encode($lawyers)
-        ));
+
+
+        // $lawyers = Input::get('lawyers');
+        // // dd(json_encode($lawyers));
+
+        // $emails = [];
+        // foreach($lawyers as $lawyer) {
+        //     array_push($emails, $lawyer['email']);
+        // }
+        // // dd($emails);
+
+        // $mgClient = new Mailgun(env('MAIL_SECRET'));
+        // $domain = "jbne.ch";
+ 
+        // $html = Storage::disk('local')->get('public/permanences_registration_period_mailgun.html');
+
+        // $result = $mgClient->sendMessage($domain, array(
+        //     'from'    => 'info@jbne.ch',
+        //     'to'      => $emails,
+        //     'subject' => 'Ouverture de la période d\'enregistrement des disponibilités pour la permanence',
+        //     'text'    => 'Veuillez noter qu\'il vous est désormais possible de nous communiquer vos disponibilités pour la permanence du prochain trimestre. Pour ce faire, veuillez vous rendre sur le site du JBNE en vous connectant avec vos identifiants d\'avocat. N\'hésitez pas à nous contacter en cas de problème.',
+        //     'html'    => $html,
+        //     'recipient-variables' => json_encode($lawyers)
+        // ));
     }
 }
