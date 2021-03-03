@@ -70,37 +70,20 @@ class LawyersController extends Controller
      */
     public function store(StoreLawyerBackend $request)
     {
-        $rules = array(
-            'firstname' => ['required', 'min:2', 'max:32'],
-            'lastname'  => ['required', 'min:2', 'max:32'],
-            'email' => ['required', 'email', 'max:64'],
-            'username' => ['required', 'string', 'min:6', 'max:24', 'unique:lawyers,username'],
-            'password'  => ['required', 'min:6', 'confirmed'],
-            'password_confirmation' => ['required']
-        );
-
-        $validator = Validator::make(Input::all(), $rules);
-
-        if ($validator->fails()) {
-            return Redirect::back()
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $data = Input::all();
-            if ($request->has('password')) {
-                $hashed_passwd = Hash::make($request->password);
-                $data['password'] = $hashed_passwd;
-            }
-            $data['is_confirmed'] = 1;
-
-            // $data +=['lawyer_id' => 1];
-            // dd($data);
-
-            Lawyer::create($data);
-
-            Session::flash('success', 'Avocat créé avec succès.');
-            return Redirect::route('back.lawyers.index');
+        $data = Input::all();
+        if ($request->has('password')) {
+            $hashed_passwd = Hash::make($request->password);
+            $data['password'] = $hashed_passwd;
         }
+        $data['is_confirmed'] = 1;
+
+        // $data +=['lawyer_id' => 1];
+        // dd($data);
+
+        Lawyer::create($data);
+
+        Session::flash('success', 'Avocat créé avec succès.');
+        return Redirect::route('back.lawyers.index');
     }
 
     /**
@@ -186,31 +169,5 @@ class LawyersController extends Controller
         foreach($lawyers as $lawyer) {
             Mail::to($lawyer['email'])->send(new PermanencesRegistrationPeriod($lawyer));
         }
-
-
-
-
-        // $lawyers = Input::get('lawyers');
-        // // dd(json_encode($lawyers));
-
-        // $emails = [];
-        // foreach($lawyers as $lawyer) {
-        //     array_push($emails, $lawyer['email']);
-        // }
-        // // dd($emails);
-
-        // $mgClient = new Mailgun(env('MAIL_SECRET'));
-        // $domain = "jbne.ch";
- 
-        // $html = Storage::disk('local')->get('public/permanences_registration_period_mailgun.html');
-
-        // $result = $mgClient->sendMessage($domain, array(
-        //     'from'    => 'info@jbne.ch',
-        //     'to'      => $emails,
-        //     'subject' => 'Ouverture de la période d\'enregistrement des disponibilités pour la permanence',
-        //     'text'    => 'Veuillez noter qu\'il vous est désormais possible de nous communiquer vos disponibilités pour la permanence du prochain trimestre. Pour ce faire, veuillez vous rendre sur le site du JBNE en vous connectant avec vos identifiants d\'avocat. N\'hésitez pas à nous contacter en cas de problème.',
-        //     'html'    => $html,
-        //     'recipient-variables' => json_encode($lawyers)
-        // ));
     }
 }

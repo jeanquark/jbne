@@ -23,7 +23,7 @@ class StoreLawyer extends FormRequest
     {
         return [
             'email' => ['required', 'email'],
-            'username' => ['required', 'string', 'min:6', 'max:24', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ_ ,.\'-]+$/i', 'unique:lawyers,username'],
+            'username' => ['required', 'string', 'min:6', 'max:24', 'regex:/^[a-z0-9àâçéèêëîïôûùüÿñæœ_ ,.\'-]+$/i', 'unique:lawyers,username'],
             'password' => ['required', 'min:6', 'confirmed'],
             'password_confirmation' => ['required'],
             'lastname' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],

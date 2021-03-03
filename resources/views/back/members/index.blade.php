@@ -358,7 +358,8 @@
                                 'id': id,
                                 'email': email
                             },
-                            success: function(data) {                                
+                            success: function(data) {        
+                                console.log('data: ', data);                        
                                 swal("Succès", "L'email va être envoyé dans la prochaine minute.", "success");
                                 $("#emailsent" + id).text(data.emails_sent);
                             },

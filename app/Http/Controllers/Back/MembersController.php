@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers\Back;
+<?php
+
+namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -64,17 +66,17 @@ class MembersController extends Controller
 
         if ($request->has('password')) {
             $hashed_passwd = Hash::make($request->password);
-            $data +=['password' => $hashed_passwd];
+            $data += ['password' => $hashed_passwd];
         }
 
         $member = Member::create($data);
 
-        $memberRole = Role::where('slug', '=', 'member')->firstOrFail();
+        $memberRole = Role::where('slug', '=', 'user')->firstOrFail();
         // Attach user role to new user
         $member->roles()->attach($memberRole->id);
 
-        Session::flash('success', 'Utilisateur créé avec succès.');
-        return Redirect::route('back.members.index');
+        Session::flash('success', 'Membre créé avec succès.');
+        return redirect::to('back/members');
     }
 
     /**
@@ -98,7 +100,7 @@ class MembersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {    
+    {
         /*if (!\Entrust::can('edit-user')) {
             Session::flash('error', 'Pas autorisé à effectuer cette action. Pour obtenir une autorisation, contactez le webmaster.');
             return Redirect::back();
@@ -164,7 +166,7 @@ class MembersController extends Controller
         $id = Input::get('id');
 
         $member = Member::findOrFail($id);
-        
+
         $member->is_active = !$member->is_active;
         $member->save();
 
@@ -182,20 +184,11 @@ class MembersController extends Controller
     {
         $id = Input::get('id');
         $member = Member::findOrFail($id);
-        $member['pathToImage'] = 'https://jbne.ch/images/logo.png';
 
-        // $receiverAddress = Input::get('email');
-        $receiverAddress = [Input::get('email'), env('MAIL_POSTMASTER')];
-        // dd($receiverAddress);
+        Mail::to($member->email)->send(new ValiderInscriptionMembres($member));
 
-        $when = \Carbon\Carbon::now()->addMinutes(2);
-
-        // Mail::to($receiverAddress)->queue(new ValiderInscriptionMembres($user));
-        Mail::to($receiverAddress)->later($when, new ValiderInscriptionMembres($member));
-        // Mail::to($receiverAddress)->send(new ValiderInscriptionMembres($user));
         if (!count(Mail::failures()) > 0) {
             $member->increment('emails_sent');
         }
-        return response()->json($member);
     }
 }

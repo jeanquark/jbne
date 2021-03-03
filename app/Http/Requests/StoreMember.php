@@ -24,7 +24,7 @@ class StoreMember extends FormRequest
         return [
             'firstname' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
             'lastname' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => ['required', 'email', 'unique:members,email'],
             'password'  => ['required', 'min:6', 'confirmed'],
             'password_confirmation' => ['required']
         ];
