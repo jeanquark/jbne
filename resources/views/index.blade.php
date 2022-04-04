@@ -684,6 +684,20 @@
         </div><!-- /.container -->
     </section>
 
+    <section id="sponsors">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h2 class="section-heading">Partenaires</h4>
+                    <div class="row text-center" style="margin-top: 60px;">
+                        <div class="col-md-6">
+                            <a href="https://www.eyetek.ch/forensys" target="_blank"><img src="{{ asset('images/sponsors/forensys.svg') }}" width="200px" style="vertical-align: middle;" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 
 @section('scripts')
