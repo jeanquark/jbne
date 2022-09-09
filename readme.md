@@ -23,6 +23,7 @@ php artisan key:generate
 To compile vue assets:
 ```bash
 npm run watch
+# Then visit http://127.0.0.1:8000/
 ```
 
 To migrate DB tables:

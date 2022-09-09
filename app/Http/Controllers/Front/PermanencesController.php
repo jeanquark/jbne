@@ -174,7 +174,7 @@ class PermanencesController extends Controller
      */
     public function edit($id)
     {
-        // if (false) {
+        // dd(env('PERMANENCES_AVAILABILITIES_CLOSING_DAY'));
         if (date('j') > env('PERMANENCES_AVAILABILITIES_CLOSING_DAY') || (date('n') != 3 && date('n') != 6 && date('n') != 9 && date('n') != 12)) {
             Session::flash('warning', 'Il n\'est plus possible de modifier vos disponibilités. La période d\'enregistrement court du 1<sup>er</sup> au ' . env("PERMANENCES_AVAILABILITIES_CLOSING_DAY") . ' du mois précédent le prochain trimestre (par exemple du 1<sup>er</sup> au ' . env("PERMANENCES_AVAILABILITIES_CLOSING_DAY") . ' mars pour le 2<sup>ème</sup> trimestre). Veuillez nous contacter en cas de changement de vos disponibilités après la fermeture de la période d\'enregistrement.');
 
