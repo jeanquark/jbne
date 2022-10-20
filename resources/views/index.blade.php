@@ -522,7 +522,15 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="col-lg-12 text-center">
+                            <div class="col-xs-12 text-center">
+                                <div class="text-center">
+                                    @if($errors->has('g-recaptcha-response'))
+                                        <span class="help-block" style="color: #a94442; background-color: #fff; border-radius: 4px; padding: 15px;"><b>Veuillez valider le captcha.</b></span>
+                                    @endif
+                                    {!! Captcha::display(['data-theme' => 'light','data-type' => 'audio']) !!}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 text-center">
                                 {!! Form::submit('Envoyer Message', array('class'=>'btn btn-xl')) !!}
                             </div>
                         </div>

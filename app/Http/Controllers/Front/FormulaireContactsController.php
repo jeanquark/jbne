@@ -36,17 +36,20 @@ class FormulaireContactsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreContact $request)
+    // public function store(StoreContact $request) // Does not redirect to anchor
+    public function store(Request $request)
     {
+        // dd('abc');
         $rules = array(
             'nom' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
             'prenom' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
         	'email' => ['required', 'email'],
             'message' => ['required','max:2048', "regex:/^[a-zàâçéèêëîïôûùüÿñæœ0-9?$@#()'!,+\-=_:.&€£*%\s]+$/i"],
+            'g-recaptcha-response' => 'required|captcha'
         );
 
         $validator = Validator::make(Input::all(), $rules);
-
+        // dd($validator);
         if ($validator->fails()) {
             return Redirect::to(URL::previous() . "#contact")
                 ->withErrors($validator)

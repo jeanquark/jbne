@@ -21,14 +21,14 @@ class StoreContact extends FormRequest
      */
     public function rules()
     {
-        //dd('abc');
+        // dd('abc');
 
         return [
             'nom' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
             'prenom' => ['required', 'min:2', 'max:32', 'regex:/^[a-zàâçéèêëîïôûùüÿñæœ ,.\'-]+$/i'],
             'email' => ['required', 'email'],
             'message' => ['required','max:2048', "regex:/^[a-zàâçéèêëîïôûùüÿñæœ0-9?$@#()'!,+\-=_:.&€£*%\s]+$/i"],
-            //'g-recaptcha-response' => ['required', 'captcha']
+            'g-recaptcha-response' => ['required', 'captcha']
         ];
     }
 }
