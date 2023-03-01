@@ -3,13 +3,14 @@ name: Publish Website
 jobs:
   deploy-file-updates:
     name: Deploy file updates
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@master
       with:
         fetch-depth: 2
     - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@3.0.0
+      uses: SamKirkland/FTP-Deploy-Action@v3.1.2-patch
       with:
         ftp-server: ${{ secrets.FTP_HOST }}/web/jbne
         ftp-username: ${{ secrets.FTP_USERNAME }}
