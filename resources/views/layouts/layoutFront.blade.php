@@ -69,7 +69,7 @@
         <div class="container" style="postion: absolute; bottom: 0;">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 class="text-xs-center">Tous droits réservés &copy; <?php echo date("Y"); ?> jbne.ch</h4>
+                    <h4 class="text-xs-center">Tous droits réservés &copy; <?php echo date("Y"); ?> jbne.ch</h4><small>v1.0</small>
                 </div>
                 
             </div>
