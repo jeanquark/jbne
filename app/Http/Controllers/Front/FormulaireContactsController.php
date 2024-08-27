@@ -61,7 +61,7 @@ class FormulaireContactsController extends Controller
             FormulaireContact::create($data);
 
             $receiverAddress = [env('MAIL_ALL_RECEIVER'), env('MAIL_CONTACT_RECEIVER')];
-            // Mail::to($receiverAddress)->send(new Contact($data));
+            Mail::to($receiverAddress)->send(new Contact($data));
 
             \Toastr::success('Votre message nous a bien <br/>été envoyé.', 'Succès', ['timeOut' => 0]);
             //return Redirect::to('formulaire-contact');
